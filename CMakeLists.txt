@@ -15,7 +15,7 @@ add_executable(test_factor PrimeNumeric/Factorisation/test_factor.c PrimeNumeric
 add_executable(test_prime PrimeNumeric/PrimesTests/test_primes.c)
 add_executable(test_seeking PrimeNumeric/SeekingAlg/test_seeking.c)
 
-add_executable(Fields main.c GeneralField/Functions/power.h GeneralField/Functions/MultiplicativeInverse.h GeneralField/Functions/Euler.h GeneralField/Functions/Lezhandr.h DataStructures/NumericList.h AsimptoticAnalysis/Difficulty.h AsimptoticAnalysis/Efficiency.h FastOperators/Power/Karatsuba.h FastOperators/Power/IterativePow.h)
+add_executable(Fields main.c )
 
 
 #SET_TARGET_PROPERTIES(RSAjoke PROPERTIES LINKER_LANGUAGE CXX)
