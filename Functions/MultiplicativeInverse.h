@@ -1,7 +1,7 @@
 #ifndef FIELDS_MULTIPLICATIVEINVERSE_H
 #define FIELDS_MULTIPLICATIVEINVERSE_H
 
-#include "../FastOperators/Karatsuba.h"
+#include "../Operators/Karatsuba.h"
 #include "Euler.h"
 
 unsigned short is_invert(unsigned a, unsigned b, unsigned mod);
