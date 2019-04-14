@@ -1,0 +1,4 @@
+#ifndef FIELDS_LAMBDA_H
+#define FIELDS_LAMBDA_H
+
+#endif //FIELDS_LAMBDA_H
