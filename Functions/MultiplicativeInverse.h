@@ -13,7 +13,7 @@ unsigned short is_invert(unsigned a, unsigned b, unsigned mod){
 };
 
 unsigned invert(unsigned a, unsigned mod){
-    return Karatsuba(a, Euler(mod)) % mod;
+    return Karatsuba_pw(a, Euler(mod)) % mod;
 }
 
 
