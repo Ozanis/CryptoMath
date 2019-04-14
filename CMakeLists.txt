@@ -6,16 +6,16 @@ set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_C_COMPILER /usr/bin/gcc)
 
-include_directories(DiscreteLog ECC GeneralField PrimeNumeric)
+include_directories(DiscreteLog ECC GeneralField PrimeNumeric DataStructures AsimptoticAnalysis FastOperators)
 
 add_executable(test_log DiscreteLog/test_log.c)
 add_executable(test_ECC ECC/test_ECC.c)
 add_executable(test_GeneralField GeneralField/test_field.c)
-add_executable(test_factor PrimeNumeric/Factorisation/test_factor.c)
+add_executable(test_factor PrimeNumeric/Factorisation/test_factor.c PrimeNumeric/Factorisation/Algs.h)
 add_executable(test_prime PrimeNumeric/PrimesTests/test_primes.c)
 add_executable(test_seeking PrimeNumeric/SeekingAlg/test_seeking.c)
 
-add_executable(Fields main.c)
+add_executable(Fields main.c GeneralField/Functions/power.h GeneralField/Functions/MultiplicativeInverse.h GeneralField/Functions/Euler.h GeneralField/Functions/Lezhandr.h DataStructures/NumericList.h AsimptoticAnalysis/Difficulty.h AsimptoticAnalysis/Efficiency.h FastOperators/Power/Karatsuba.h FastOperators/Power/IterativePow.h)
 
 
 #SET_TARGET_PROPERTIES(RSAjoke PROPERTIES LINKER_LANGUAGE CXX)

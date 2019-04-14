@@ -1,0 +1,4 @@
+#ifndef FIELDS_POWER_H
+#define FIELDS_POWER_H
+
+#endif //FIELDS_POWER_H

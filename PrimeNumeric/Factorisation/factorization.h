@@ -1,17 +1,14 @@
 #ifndef RSAJOKE_FACTORIZATION_H
 #define RSAJOKE_FACTORIZATION_H
 
-#include "../SeekingAlg/primes.h"
+#include "Algs.h"
+#include "../../DataStructures/NumericList.h"
 
-typedef struct {
-    unsigned *primes;
-    unsigned *sequences;
-    unsigned num;
-    unsigned of_var;
-} primes;
+NumericList * prime_factorization(unsigned val);
 
-primes * prime_factorization(unsigned val);
+NumericList * prime_factorization(unsigned val){
 
-primes * prime_factorization(unsigned val){};
+    return init_NL()
+};
 
 #endif //RSAJOKE_FACTORIZATION_H
