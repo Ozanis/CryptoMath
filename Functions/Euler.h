@@ -1,7 +1,7 @@
 #ifndef FIELDS_EULER_H
 #define FIELDS_EULER_H
 
-#include "Factorisation/factorization.h"
+#include "../PrimeNumeric/Factorisation/factorization.h"
 #include "Karatsuba.h"
 
 unsigned Euler(unsigned p);
