@@ -1,8 +1,8 @@
 #ifndef FIELDS_EULER_H
 #define FIELDS_EULER_H
 
-#include "../../PrimeNumeric/Factorisation/factorization.h"
-#include "../../FastOperators/Karatsuba.h"
+#include "Factorisation/factorization.h"
+#include "Karatsuba.h"
 
 unsigned Euler(unsigned p);
 unsigned recombine(NumericList * factors);

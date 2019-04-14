@@ -1,7 +1,7 @@
 #ifndef FIELDS_LEZHANDR_H
 #define FIELDS_LEZHANDR_H
 
-#include "../FastOperators/Karatsuba.h"
+#include "Karatsuba.h"
 
 unsigned Lezhander(unsigned a, unsigned p);
 

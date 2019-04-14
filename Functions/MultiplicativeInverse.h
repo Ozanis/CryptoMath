@@ -2,7 +2,7 @@
 #define FIELDS_MULTIPLICATIVEINVERSE_H
 
 #include "Karatsuba.h"
-#include "../../GeneralField/Functions/Euler.h"
+#include "Euler.h"
 
 unsigned short is_invert(unsigned a, unsigned b, unsigned mod);
 unsigned invert(unsigned a, unsigned mod);

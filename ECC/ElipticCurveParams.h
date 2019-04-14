@@ -2,8 +2,8 @@
 #define FIELDS_ELIPTICCURVEPARAMS_H
 
 #include "../FastOperators/IterativePow.h"
-#include "../GeneralField/Functions/Monad.h"
-#include "../GeneralField/Functions/Lezhandr.h"
+#include "Monad.h"
+#include "Lezhandr.h"
 #include "malloc.h"
 #include "math.h"
 
