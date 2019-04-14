@@ -1,39 +1,63 @@
 #ifndef FIELDS_ELIPTICCURVEPARAMS_H
 #define FIELDS_ELIPTICCURVEPARAMS_H
 
-#include "../GeneralField/ECCfield.h"
+#include "../FastOperators/IterativePow.h"
+#include "../GeneralField/Functions/Monad.h"
+#include "../GeneralField/Functions/Lezhandr.h"
 #include "malloc.h"
 #include "math.h"
-
-typedef struct{
-    unsigned P;
-}Field;
-
-unsigned Monad(unsigned p);
 
 typedef struct {
     unsigned a;
     unsigned b;
+    unsigned Field;
     unsigned Charact;
     unsigned D;
+    unsigned Inv;
+    unsigned Range[2];
+
 }EllipticCurve;
 
-unsigned F(unsigned x);
-unsigned Discriminant(unsigned a, unsigned b);
-unsigned Inv();
-unsigned * Hasse(unsigned p);
-unsigned Sequence(unsigned x);
-unsigned Lezhander(void * f);
+EllipticCurve * init_curve(unsigned a, unsigned b, unsigned Field);
+unsigned F_x(EllipticCurve * Curve, unsigned x);
+void Discriminant(EllipticCurve * Curve);
+void Hasse(EllipticCurve * Curve);
+void Charact_iter(EllipticCurve * Curve);
 
-unsigned F(unsigned x){
-    return
+unsigned F_x(EllipticCurve * Curve, unsigned x){
+    return Karatsuba_pw(x, 3) + Karatsuba_ml(x, Curve->a) + Curve->b;
+};
+
+void Discriminant(EllipticCurve * Curve){
+    unsigned A = Karatsuba_pw(Curve->a, 3);
+    Curve->D = A + 27*Karatsuba_pw(Curve->b, 2);
+    unsigned args={Curve->D, Curve->Field-1, A, 1728};
+    Curve->Inv = monad(&Karatsuba_mul, &args, 4);
+};
+
+void Hasse(EllipticCurve * Curve){
+    Curve->Range[0]=Curve->Range[1]=Curve->Field+1;
+    unsigned defect = 2 * (unsigned)sqrt(Curve->Field);
+    Curve->Range[0] -= defect;
+    Curve->Range[1] += defect;
+};
+
+void Charact_iter(EllipticCurve * Curve){
+    Curve->Charact = Curve->Field + 1;
+    for(unsigned i = 0; i<Curve->Field; Curve->Charact+=Lezhander(F_x(Curve, i++), Curve->Charact));
 };
 
 
-
-
-
-
+EllipticCurve * init_curve(unsigned a, unsigned b, unsigned Field){
+    EllipticCurve * Curve = malloc(sizeof(EllipticCurve));
+    Curve->a = a;
+    Curve->a = b;
+    Curve->Field = Field;
+    Discriminant(Curve);
+    Hasse(Curve);
+    Charact_iter(Curve);
+    return Curve;
+}
 
 
 
@@ -42,6 +66,15 @@ typedef struct {
     unsigned y;
 }EllipticDot;
 
+
+unsigned short dot_exist(EllipticCurve * Curve, EllipticDot * dot);
+
+unsigned short dot_exist(EllipticCurve * Curve, EllipticDot * dot){
+    if((Karatsuba_sqr(dot->y) % Curve->Field) == (F_x(Curve, dot->x) % Curve->Field)) return 1;
+    else return 0;
+}
+
+
 typedef struct{
     EllipticDot * p;
     EllipticDot * q;
@@ -49,81 +82,7 @@ typedef struct{
 }EllipticSum;
 
 
+EllipticSum * elliptic_sum(EllipticDot * p, EllipticDot * q);
 
-//class EllipticCurve: public Field{
-//private:
-//    unsigned A;
-//    unsigned B;
-//    unsigned Charact;
-//public:
-//    explicit EllipticCurve(unsigned power, unsigned a, unsigned b) : Field(power), A(a), B(b), Charact(0) {};
-//    ~EllipticCurve() = default;
-//    unsigned F(unsigned x);
-//    unsigned def_sequence_Lezhandr();
-//    unsigned Hasse();
-//};
-//
-//unsigned EllipticCurve :: F(unsigned x){
-//    return (x^3+x*this->A+this->B) % this->N;
-//};
-//
-//unsigned EllipticCurve :: def_sequence_Lezhandr(){
-//    unsigned x;
-//    for(x=0; x<=this->N--; x++){
-//        x+=Lezhandr(F(x), this->N);
-//    }
-//    return x+1+this->N;
-//};
-//
-//unsigned EllipticCurve :: Hasse(){
-//    return 1 + this->N + 2*((unsigned)ceil(sqrt(this->N)));
-//}
-//
-//
-//class EllipticDot: public GeneralField{
-//private:
-//    unsigned X;
-//    unsigned Y;
-//public:
-//    unsigned m;
-//    explicit EllipticDot(unsigned power, unsigned x, unsigned y): GeneralField(power), Y(y), X(x), m(0){};
-//    ~EllipticDot() = default;
-//    unsigned lambda(EllipticDot * dot1, EllipticDot * dot2);
-//    unsigned lambda(EllipticDot * dot1, EllipticDot * dot2, unsigned a);
-//    unsigned dot_sequence_iterable();
-//    EllipticDot add_x(EllipticDot * dot1, EllipticDot * dot2);
-//    EllipticDot add_y(EllipticDot * dot1, EllipticDot * dot2);
-//};
-//
-//unsigned EllipticDot :: lambda(EllipticDot * dot1, EllipticDot * dot2){
-//    return multipling(substr(dot_1->y, dot_2->y, dot_1->n), multiplicative_inverse(substr(dot_1->x, dot_2->x, dot_1->n), dot_1->n), dot_1->n);
-//};
-//
-//unsigned EllipticDot :: lambda(EllipticDot * dot1, EllipticDot * dot2, unsigned a){
-//    return multipling(adding(multipling(3, dot->x^2, dot->n), a, dot->n), multiplicative_inverse(multipling(2, dot->y, dot->n), dot->n), dot->n);
-//};
-//
-//unsigned EllipticDot :: add_x(EllipticDot * dot1, EllipticDot * dot2){
-//    return (dot1->X^2-2*dot_2->x) % dot_1->n;
-//};
-//
-//unsigned EllipticDot :: add_y(EllipticDot * dot1, EllipticDot * dot2){
-//    return adding(dot_2->y, multipling(m_different(dot_1, dot_2), substr(add_x(dot_1, dot_2), dot_2->x, dot_1->n), dot_1->n), dot_1->n);
-//};
-//
-//unsigned EllipticDot ::  def_dot_sequence_iterable(eliptic_dot * dot){
-//    dot->m = m_different(dot, dot);
-//    eliptic_dot * temp = dot;
-//    unsigned sequence;
-//    for(sequence = 1; ((dot->x != 0) && (dot->y != 0)); sequence++){
-//        temp->m = m_different(temp, temp);
-//        temp->x = add_x(temp, dot);
-//        temp->y = add_y(temp, dot);
-//        printf("x= %u\n", temp->x);
-//        printf("y= %u\n", temp->y);
-//        sequence +=1;
-//    }
-//    return sequence;
-//};
 
 #endif //FIELDS_ELIPTICCURVEPARAMS_H

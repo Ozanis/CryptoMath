@@ -1,0 +1,4 @@
+#ifndef FIELDS_SHUFALG_H
+#define FIELDS_SHUFALG_H
+
+#endif //FIELDS_SHUFALG_H

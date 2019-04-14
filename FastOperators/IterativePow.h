@@ -4,6 +4,7 @@
 unsigned modular_pow(int base, unsigned pow, unsigned modulus);
 unsigned doubling_pow(unsigned base, unsigned pow);
 
+
 unsigned modular_pow(int base, unsigned pow, unsigned modulus) {
     unsigned a = base % modulus;
     for (--pow; pow > 1; pow >>= 2) {

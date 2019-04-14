@@ -1,0 +1,14 @@
+//class GeneralField{
+//public:
+//    unsigned N;
+//
+//    explicit GeneralField(unsigned power): N(power){};
+//    ~GeneralField() = default;
+//
+//    virtual GeneralField operator +(unsigned &a){
+//
+//    };
+//    virtual GeneralField operator -(unsigned &a){};
+//    virtual GeneralField operator *(unsigned &a){};
+//    virtual GeneralField operator /(unsigned &a){};
+//};

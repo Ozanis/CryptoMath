@@ -4,7 +4,7 @@
 #include "malloc.h"
 
 typedef struct {
-    unsigned val;
+    unsigned prime;
     unsigned sequence;
 }Pair;
 
