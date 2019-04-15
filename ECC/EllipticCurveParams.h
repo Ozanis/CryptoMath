@@ -4,7 +4,6 @@
 #include "../Operators/IterativePow.h"
 #include "Clousure.h"
 #include "Lezhandr.h"
-#include "malloc.h"
 #include "math.h"
 
 typedef struct {
@@ -23,16 +22,16 @@ typedef struct {
 }EllipticCurve;
 
 EllipticCurve * init_curve(unsigned a, unsigned b, unsigned Field);
-unsigned F_x(EllipticCurve * Curve, unsigned x);
-void Discriminant(EllipticCurve * Curve);
+unsigned F_x(EllipticCurve * Curve, unsigned x);                                    // %N
+void Discriminant(EllipticCurve * Curve);                                           // %N
 void Hasse(EllipticCurve * Curve);
 void Charact_iter(EllipticCurve * Curve);
 
-int dot_exist(EllipticCurve * Curve, unsigned x, unsigned y);
-EllipticDot * create_dot(EllipticCurve * Curve, unsigned x, unsigned y);
-unsigned lambda(EllipticDot * p, EllipticDot * q);
-EllipticDot * elliptic_sum(EllipticDot * p, EllipticDot * q);
-EllipticDot * elliptic_mul(EllipticDot * R, EllipticCurve * Curve, unsigned seq);
+int dot_exist(EllipticCurve * Curve, unsigned x, unsigned y);                       // %N
+EllipticDot * create_dot(EllipticCurve * Curve, unsigned x, unsigned y);            // %N
+unsigned lambda(EllipticDot * p, EllipticDot * q);                                  // %N
+EllipticDot * elliptic_sum(EllipticDot * p, EllipticDot * q);                       // %N
+EllipticDot * elliptic_mul(EllipticDot * R, EllipticCurve * Curve, unsigned seq); // %N
 
 
 typedef struct {
@@ -47,13 +46,13 @@ void attach_Dot(EllipticDot ** Dots);
 
 
 unsigned F_x(EllipticCurve * Curve, unsigned x){
-    return (Karatsuba_pw(x, 3) + Karatsuba_ml(x, Curve->a) + Curve->b);
+    return (Karatsuba_pw(x, 3) + Karatsuba_ml(x, Curve->a) + Curve->b);     // %N
 };
 
 void Discriminant(EllipticCurve * Curve){
     unsigned A = Karatsuba_ml(Karatsuba_pw(Curve->a, 3), 4);
-    Curve->D = (A + Karatsuba_ml(27,Karatsuba_pw(Curve->b, 2)));
-    unsigned args={1728, A, Karatsuba_pw(Curve->D, Curve->Field-2)}; // {1728, 4*a^3, D^-1} % p = {1728, 4*a^3, D^(Phi(p)-1)%p} % p
+    Curve->D = (A + Karatsuba_ml(27, Karatsuba_pw(Curve->b, 2)));
+    unsigned args={1728, A, Karatsuba_pw(Curve->D, Curve->Field-2)};    // %N     // {1728, 4*a^3, D^-1} % p = {1728, 4*a^3, D^(Phi(p)-1)%p} % p
     Curve->Inv = multi_mul(&args, Curve->Field, 4);
 };
 
@@ -98,21 +97,21 @@ EllipticDot * create_dot(EllipticCurve * Curve, unsigned x, unsigned y){
 
 
 unsigned lambda(EllipticDot * p, EllipticDot * q){
-    return Karatsuba_ml((p->y - q->y), Karatsuba_pw((p->x - q->x), field-2));
+    return Karatsuba_ml((p->y - q->y), Karatsuba_pw((p->x - q->x), field-2));       // %N
 };
 
 EllipticDot * elliptic_sum(EllipticDot * p, EllipticDot * q){
     EllipticDot * R = malloc(sizeof(EllipticDot));
     unsigned m = lambda(p, q);
-    R->x = (Karatsuba_pw(m, 2) - p->x - q->x);
-    R->y = q->y + Karatsuba_ml(R->x - q->x, m);
+    R->x = (Karatsuba_pw(m, 2) - p->x - q->x);      // %N
+    R->y = q->y + Karatsuba_ml(R->x - q->x, m);     // %N
     return R;
 }
 
 EllipticDot * elliptic_mul(EllipticDot * R, EllipticCurve * Curve, unsigned seq){
     EllipticDot * Mul = R;
     for(unsigned i =1; i <= seq; i++){
-        Mul = elliptic_sum(Mul, R);
+        Mul = elliptic_sum(Mul, R);                 // %N
     }
     return Mul;
 }

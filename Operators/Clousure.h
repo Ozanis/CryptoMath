@@ -3,25 +3,29 @@
 
 #include "Karatsuba.h"
 
-unsigned multi_mul(unsigned *args, unsigned mod, unsigned arg_num);
 
-unsigned multi_sum(unsigned *args, unsigned mod);
+unsigned multi_mul(unsigned mod, ...);
+unsigned multi_sum(unsigned mod, ...);
+unsigned Closure(void (*fn)(unsigned, ... ), unsigned mod);
 
-unsigned multi_mul(unsigned *args, unsigned mod, unsigned arg_num){
-    unsigned var = 1;
-    for(arg_num; arg_num > 0; arg_num--) {
-        var = Karatsuba_ml(var, args[arg_num]) % mod;
+unsigned multi_mul(unsigned mod, ...){
+    unsigned var =1;
+    for(unsigned * p = &mod; ){
+        var = Karatsuba_ml(var, ) % mod;
     }
     return var;
 }
 
-unsigned multi_sum(unsigned *args, unsigned mod){
+unsigned multi_sum(unsigned mod, ...){
     unsigned var = 0;
     for(arg_num; arg_num > 0; arg_num--) {
-        var += args[arg_num];
-        var %= mod;
+        var += args[arg_num]%= mod;
     }
     return var;
+}
+
+unsigned Closure(void (*fn)(unsigned, ... ), unsigned mod){
+
 }
 
 //Karatsuba_ml(Karatsuba_ml(Karatsuba_ml(Curve->D, Curve->Charact-1), A), 1728)
