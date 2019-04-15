@@ -21,4 +21,10 @@ unsigned Karatsuba_sqr(unsigned a){
     return Karatsuba_ml(a, a);
 };
 
+
+
+
+
+
+
 #endif //FIELDS_KARATSUBA_H

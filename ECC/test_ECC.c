@@ -1,4 +1,4 @@
-#include "ElipticCurveParams.h"
+#include "EllipticCurveParams.h"
 
 int main(){
 
