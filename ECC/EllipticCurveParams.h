@@ -13,9 +13,11 @@ typedef struct {
 
 
 typedef struct {
+    EllipticDot ** dots;
+    int Charact;
     int a;
     int b;
-    int Charact;
+    int Seq;
     int D;
     int Inv;
     int Range[2];
@@ -34,13 +36,6 @@ EllipticDot * elliptic_sum(EllipticDot * p, EllipticDot * q);                   
 EllipticDot * elliptic_mul(EllipticDot * R, EllipticCurve * Curve, unsigned seq); // %N
 
 
-typedef struct {
-    unsigned N;
-    EllipticCurve * Curve;
-    EllipticDot ** Dots;
-} Field;
-
-Field * CreateField();
 void attach_Curve(EllipticCurve * Curve);
 void attach_Dot(EllipticDot ** Dots);
 
