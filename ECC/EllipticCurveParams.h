@@ -46,11 +46,11 @@ void attach_Dot(EllipticDot ** Dots);
 
 
 int F_x(EllipticCurve * Curve, int x){
-    return (Karatsuba_pw(x, 3) + Karatsuba_ml(x, Curve->a) + Curve->b);     // %N
+    return (_pw_(x, 3) + Karatsuba_ml(x, Curve->a) + Curve->b);     // %N
 };
 
 void Discriminant(EllipticCurve * Curve){
-    int A = Karatsuba_ml(Karatsuba_pw(Curve->a, 3), 4);
+    int A = _ml_(_pw_(Curve->a, 3), 4);
     Curve->D = (A + Karatsuba_ml(27, Karatsuba_pw(Curve->b, 2)));
     unsigned args={1728, A, Karatsuba_pw(Curve->D, Curve->Field-2)};    // %N     // {1728, 4*a^3, D^-1} % p = {1728, 4*a^3, D^(Phi(p)-1)%p} % p
     Curve->Inv = multi_mul(&args, Curve->Field, 4);
@@ -80,7 +80,7 @@ EllipticCurve * init_curve(int a, int b, int Field){
 
 
 int dot_exist(EllipticCurve * Curve, int x, int y){
-    return Karatsuba_sqr(y) == F_x(Curve, x);
+    return _sqr_(y) == F_x(Curve, x);
 }
 
 EllipticDot * create_dot(EllipticCurve * Curve, int x, int y){
@@ -104,7 +104,7 @@ EllipticDot * elliptic_sum(EllipticDot * p, EllipticDot * q){
     EllipticDot * R = malloc(sizeof(EllipticDot));
     int m = lambda(p, q);
     R->x = (Karatsuba_pw(m, 2) - p->x - q->x);      // %N
-    R->y = q->y + Karatsuba_ml(R->x - q->x, m);     // %N
+    R->y = q->y + _ml_(R->x - q->x, m);     // %N
     return R;
 }
 
