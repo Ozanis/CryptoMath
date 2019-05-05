@@ -3,6 +3,7 @@
 
 #include "malloc.h"
 #include "pthread.h"
+#include "IterativePow.h"
 
 typedef struct {
     int * var;
@@ -26,6 +27,7 @@ vector * gen_vector(int num, unsigned size);
 vector * as_bytes(vector * num);
 matrix * parallel_ml(matrix * bytes);
 int recombine(matrix * bytes);
+int split(int * array);
 vector * Karatsuba_ml(vector * A, vector * B);
 
 int _ml_(vector * args);
@@ -62,10 +64,26 @@ vector * as_bytes(vector * num){
         temp /= 10;
     }
     return num;
-}
+};
 
-vector * Karatsuba_ml(vector * A, vector * B){
+int split(int * array){
 
+
+};
+
+vector * Karatsuba_ml(vector * A, vector * B) {
+    int size = A->len / 2;
+    switch (A->len % 2) {
+        case 1: {
+
+        }
+        default: {
+            int array[2][size];
+            for (int i = 0, j = 0; i < 2, j < size; i++, j++) {
+
+            }
+        }
+    }
 };
 
 matrix * parallel_ml(matrix * bytes) {
@@ -83,17 +101,16 @@ matrix * parallel_ml(matrix * bytes) {
             parallel_ml(low_oreder);
         }
     }
-}
+};
 
 int recombine(matrix * bytes){
     int result = 0;
     vector * V = bytes->vectors[0];
     V->len = bytes->len;
     free(bytes);
-    for(unsigned i = 0; i < V->len; i++){
+    for(int i = 0; i < V->len; i++){
         result += V->var[i]*10^i;
     }
-
     return result;
 }
 
@@ -106,18 +123,18 @@ int _ml_(vector * args){
     };
     if(bytes->len % 2 == 1) Karatsuba_ml(bytes->vectors[bytes->len], bytes->vectors[bytes->len--]);
     return recombine(parallel_ml(bytes));
-};
+}
 
 int _pw_(int base, unsigned pow){
 
     return 0;
-};
+}
 
 
 int Karatsuba_pw(vector * base, int pow){
 
 
-};
+}
 
 
 

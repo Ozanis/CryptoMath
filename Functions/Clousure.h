@@ -1,7 +1,7 @@
 #ifndef FIELDS_MONAD_H
 #define FIELDS_MONAD_H
 
-#include "Karatsuba.h"
+#include "../multipling/Karatsuba.h"
 
 
 int multi_mul(unsigned mod, ...);
@@ -28,5 +28,4 @@ int Closure(void (*fn)(unsigned, ... ), unsigned mod){
 
 }
 
-//Karatsuba_ml(Karatsuba_ml(Karatsuba_ml(Curve->D, Curve->Charact-1), A), 1728)
 #endif //FIELDS_MONAD_H

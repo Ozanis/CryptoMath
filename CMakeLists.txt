@@ -11,11 +11,11 @@ include_directories(DiscreteLog ECC Functions PrimeNumeric DataStructures Asimpt
 add_executable(test_log DiscreteLog/test_log.c)
 add_executable(test_ECC ECC/test_ECC.c ECC/SequenceAlgs/ShufAlg.h)
 add_executable(test_GeneralField Functions/test_field.c Functions/gcd.h Functions/ChineseTheorem.h Functions/PeriodicFractions.h)
-add_executable(test_operator Operators/test_operator.c)
+add_executable(test_operator Operators/test_operator.c multipling/ShtrassenAlg.h)
 add_executable(test_factor PrimeNumeric/Factorisation/test_factor.c)
 add_executable(test_prime PrimeNumeric/PrimesTests/test_primes.c)
 add_executable(test_seeking PrimeNumeric/SeekingAlg/test_seeking.c PrimeNumeric/SeekingAlg/Mersenne.h)
-add_executable(Fields main.c)
+add_executable(Fields main.c ECC/CurveIndex/Curve25519.h)
 
 
 #SET_TARGET_PROPERTIES(RSAjoke PROPERTIES LINKER_LANGUAGE CXX)

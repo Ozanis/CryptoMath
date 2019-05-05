@@ -1,9 +1,8 @@
 #ifndef FIELDS_ELIPTICCURVEPARAMS_H
 #define FIELDS_ELIPTICCURVEPARAMS_H
 
-#include "../Operators/IterativePow.h"
-#include "Clousure.h"
-#include "Lezhandr.h"
+#include "../Functions/Clousure.h"
+#include "../Functions/Lezhandr.h"
 #include "math.h"
 
 typedef struct {
@@ -61,7 +60,7 @@ void Hasse(EllipticCurve * Curve){
 void Charact_iter(EllipticCurve * Curve){
     Curve->Charact = Curve->Field + 1;
     for(unsigned i = 0; i < Curve->Field; Curve->Charact+=Lezhander(F_x(Curve, i++), Curve->Field));
-};
+}
 
 EllipticCurve * init_curve(int a, int b, int Field){
     EllipticCurve * Curve = malloc(sizeof(EllipticCurve));

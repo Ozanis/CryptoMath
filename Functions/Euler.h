@@ -2,7 +2,7 @@
 #define FIELDS_EULER_H
 
 #include "../PrimeNumeric/Factorisation/factorization.h"
-#include "Karatsuba.h"
+#include "../multipling/Karatsuba.h"
 
 unsigned Euler(unsigned p);
 unsigned recombine(NumericList * factors);
