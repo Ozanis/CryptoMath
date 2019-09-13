@@ -1,11 +1,12 @@
 <h1>CryptoMath </h1>
  
+*Researching and development*
+
  <h2>Few words about project</h2>
  That project is amatour crypto research and includes by default other my projects:
 
 * Shonghe-Shtrassen multiplication
-* X509decoder
-* LSFSRgenerator
+* X509decoder (in develop)
 
 **_The aim of project is creating tools for implementing and testing ECC crypto ciphers_**
 
