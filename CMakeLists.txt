@@ -1,12 +1,13 @@
 cmake_minimum_required(VERSION 3.10.2)
 
-project(Fields)
+project(Cryptomath
 
 set(CMAKE_C_STANDARD 11)
 
 set(CMAKE_C_COMPILER /usr/bin/gcc)
 
-include_directories(DiscreteLog ECC Functions PrimeNumeric DataStructures AsimptoticAnalysis Operators)
+include_directories(DiscreteLog ECC Functions PrimeNumeric DataStructures AsimptoticAnalysis OperatorsMontgomeryLib)
+
 
 add_executable(test_log DiscreteLog/test_log.c)
 add_executable(test_ECC ECC/test_ECC.c ECC/SequenceAlgs/ShufAlg.h)

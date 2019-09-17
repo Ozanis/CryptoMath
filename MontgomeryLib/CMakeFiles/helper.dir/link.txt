@@ -1,0 +1,1 @@
+/usr/bin/cc    CMakeFiles/helper.dir/src/helper.c.o  -o helper /usr/lib/libssl.so 
