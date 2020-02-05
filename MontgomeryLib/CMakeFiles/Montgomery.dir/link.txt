@@ -1,1 +1,0 @@
-/usr/bin/cc -fPIC   -shared -Wl,-soname,libMontgomery.so.1 -o libMontgomery.so.1 CMakeFiles/Montgomery.dir/src/REDC.c.o 

@@ -1,7 +1,0 @@
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/install/strip.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/install/local.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/edit_cache.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/Montgomery.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/rebuild_cache.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/install.dir
-/home/max/Projects/ComputerMathLib/MontgomeryLib/CMakeFiles/list_install_components.dir
