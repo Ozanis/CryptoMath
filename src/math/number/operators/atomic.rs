@@ -1,4 +1,6 @@
-use number::number_format;
+
+
+use number::number;
 
 fn _add(& a : num, & b : num) -> num {}
 fn _sub(& a : num, & b : num){} -> num {}
