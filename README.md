@@ -1,12 +1,15 @@
-<h1>FerumFramework</h1>
+<h1>CryptOps</h1>
  
 *Researching and development*
 
-* More cheaper realisation of large integer  multiplication
 * Parallel operations
-* Using GPU/CPU accelerations
+* Using GPU/CPU scaling
+* Detect weak ciphers
 * Cipher testing and validating
-* Robustness testing
+* Vulnerability testing
+* Factorization algorithms
+* Randomness testing
+
 
 
 
