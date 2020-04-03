@@ -1,7 +1,0 @@
-[package]
-name = "Crypto framework"
-version = "0.1.0"
-edition = "2020"
-
-[dependencies]
-path = "src"
