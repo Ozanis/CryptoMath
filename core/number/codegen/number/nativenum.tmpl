@@ -1,0 +1,176 @@
+package {{.PackageName}}
+
+
+const Zero = {{.Zero}}
+
+var (
+    IntBool = map[bool]{{.Type}}{false: 0, true: 1}
+    SignBool = map[{{.Type}}]{{.Type}}{0: 1, 1: -1}
+)
+
+type {{.Name}} struct {
+	Vector {{.Type}}
+	Len uint32
+}
+
+
+func (N {{.Name}}) Mul(X, Domain, Mod {{.Name}}) {{.Name}} {
+	N.dft(Domain, Mod)
+	X.dft(Domain, Mod)
+	for i := Zero32; i <= X.Len * N.Len - 1; i++ {
+		N.Vector[i] *= X.Vector[i]
+		N.Vector[i+1] += (N.Vector[i] / 10) * intBool[N.Vector[i] >= 10]
+		N.Vector[i] %= 10
+	}
+	return N.idft(Domain, Mod)
+}
+
+
+func (N {{.Name}}) Sqr(Domain, Mod {{.Name}}) {{.Name}} {
+	N.dft(Domain, Mod)
+	for i := Zero32; i <= N.Len; i++ {
+		N.Vector[i] *= N.Vector[i]
+		N.Vector[i+1] += (N.Vector[i] / 10) * intBool[N.Vector[i] >= 10]
+	}
+	return N.idft(Domain, Mod)
+}
+
+
+func (N {{.Name}}) Pow(X, Domain, Mod {{.Name}}) {{.Name}} {
+	return N
+}
+
+
+func (N {{.Name}}) Add(X {{.Name}}) {{.Name}} {
+	for i := Zero32; i <= X.Len; i++ {
+		N.Vector[i] += X.Vector[i]
+		N.Vector[i+1] += intBool[X.Vector[i] >= 10]
+		N.Vector[i] %= 10
+	}
+	return N
+}
+
+
+func (N {{.Name}}) Sub(X {{.Name}}) {{.Name}} {
+	var carry int8
+	for i := Zero32; i <= X.Len; i++ {
+		N.Vector[i] -= X.Vector[i]
+		carry = intBool[N.Vector[i] < 0]
+		N.Vector[i] = (N.Vector[i] * signBool[carry]) % 10
+		N.Vector[i+1] -= carry
+	}
+	return N
+}
+
+
+func (N {{.Name}}) Inv(Domain, Mod {{.Name}}) {{.Name}} {
+	return N.Pow(
+		Mod.Sub(
+			Number{
+				Vector: []int8{2},
+				Len:    1,
+			}), Domain, Mod)
+}
+
+
+func (N {{.Name}}) InvPow(X, Domain, Mod {{.Name}}) {{.Name}} {
+	return N.Pow(
+		Mod.Sub(
+			Number{
+				Vector: []int8{2},
+				Len:    1,
+			}).Sub(X), Domain, Mod)
+}
+
+
+func (N {{.Name}}) Mod(X {{.Name}}) {{.Name}} {
+	if X.Len > N.Len {
+		return N
+	}
+	for i := Zero32; i <= X.Len; i++ {
+		N.Vector[i] &= ^X.Vector[i]
+	}
+	return N
+}
+
+
+func (N {{.Name}}) Cmp(X {{.Name}}) ({{.Name}}, {{.Name}}) {
+	if T.Len > X.Len{
+		return N, X
+	}
+	if X.Len > N.Len {
+		return X, N
+	}
+	for i := Zero32; i < X.Len; i++ {
+		if N.Vector[i] > X.Vector[i] {
+			return N, X
+		} else if X.Vector[i] > N.Vector[i] {
+			return X, N
+		} else if N.Vector[i] == X.Vector[i] {
+			break
+		}
+	}
+	return N, X
+}
+
+
+func (N {{.Name}}) dft(Domain, mod {{.Name}}) {{.Name}} {
+	if N.Len == 1 {
+		return N
+	}
+	left := N.odd().dft(Domain.odd(), mod)
+	right := N.even().dft(Domain.odd(), mod)
+	for i := Zero32; i <= N.Len; i++ {
+		root := right.Vector[i] * Domain.Vector[i]
+		N.Vector[i] = left.Vector[i] + root
+		N.Vector[i + left.Len] = left.Vector[i] - root
+	}
+	return N
+
+}
+
+
+func (N {{.Name}}) idft(Domain, Mod {{.Name}}) {{.Name}} {
+	N.dft(Domain, Mod)
+	I := N.Inv(Domain, Mod)
+	for i := Zero32; i < N.Len; i++ {
+		N.Vector[i] = N.Vector[i] * I.Vector[i]
+		N.Vector[i+1] += (N.Vector[i] / 10) * intBool[N.Vector[i] >= 10]
+	}
+	return N
+}
+
+
+func (N {{.Name}}) split(idx uint32) {{.Name}} {
+	newLen := N.Len >> 2
+	newNative := Number{
+		Vector: make([]int8, newLen),
+		Len: newLen,
+	}
+	for i := idx; i <= newLen; i += 2  {
+		newNative.Vector[i] = N.Vector[i]
+	}
+	return newNative
+}
+
+
+func (N {{.Name}}) odd() {{.Name}} {
+	return N.split(1)
+}
+
+
+func (N {{.Name}}) even() {{.Name}} {
+	return N.split(0)
+}
+
+
+func (N {{.Name}}) IsZero() bool {
+	var zero bool
+	for i := Zero32; i <= N.Len; i++ {
+		zero = N.Vector[i] != 0
+		if  zero == false {
+			return false
+		}
+	}
+	return true
+}
