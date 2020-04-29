@@ -1,8 +1,0 @@
-{
-  "Name": "Number",
-  "Type": "[]int8",
-  "Zero": "uint32(0)",
-  "PackageName": "api",
-  "UseTemplate": "core/ukernel/codegen/number/native.tmpl",
-  "OutFilePath": "core/ukernel/api/native.go"
-}
