@@ -2,7 +2,6 @@
  
 *Researching and development*
 
-* Parallel operations
 * GPU/CPU scaling
 * Detect weak ciphers
 * Cipher testing and validating
