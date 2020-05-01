@@ -1,0 +1,6 @@
+integration module for implementing integration with DevOps services such as Vault
+expected structire:
+    src/integration/plugin/vault
+    src/api
+
+Following serverless
