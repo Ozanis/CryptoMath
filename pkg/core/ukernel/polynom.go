@@ -1,5 +1,6 @@
 package ukernel
 
+/*
 type Polynom struct {
 	Vector []int8
 	Len    Bin32u
@@ -73,3 +74,4 @@ func (P Polynom) Cmp(X Polynom) (Polynom, Polynom) {
 
 	return P, X
 }
+*/

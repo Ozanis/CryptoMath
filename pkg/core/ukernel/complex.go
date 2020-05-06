@@ -1,5 +1,6 @@
 package ukernel
 
+/*
 type Complex [2]int8
 
 func (C Complex) Mul(X Complex) Complex {
@@ -34,3 +35,4 @@ func (C Complex) Arg(Phi, N Bin32u) Complex {
 		im,
 	}
 }
+*/

@@ -1,3 +1,0 @@
-CPU & GPU scaling
-use the same data structure for all implementations (struct {vector,len})
-adjusting ukernel to particular platform using interfaces

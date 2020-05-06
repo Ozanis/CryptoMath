@@ -1,5 +1,6 @@
 package ukernel
 
+/*
 type Fourier struct {
 	N, Log2N Bin32u
 	Vector   []Complex
@@ -62,7 +63,7 @@ func Idft(polynom, Domain []Complex) Number {
 	}
 }
 */
-
+/*
 func (F Fourier) DftWithMemory(Domain Fourier) Fourier {
 	Y := F.butterfly()
 	for s := One32u; s <= F.Log2N; s++ {
