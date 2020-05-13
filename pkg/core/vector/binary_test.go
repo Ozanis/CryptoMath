@@ -70,7 +70,7 @@ func TestBoolToInt(t *testing.T) {
 	}
 }
 
-func TestTranspose(t *testing.T) {
+func TestInvert(t *testing.T) {
 	expected := []uint16{
 		0, 1, 1, 3, 1, 5,
 		3, 7, 1, 9, 5, 13,
@@ -82,7 +82,7 @@ func TestTranspose(t *testing.T) {
 		7, 8, 8, 9, 12, 13,
 	}
 	for i, x := range cases {
-		y := Transpose(x, Log2N[i])
+		y := Invert(x, Log2N[i])
 		fmt.Printf("%d : dec(%d) bin(%b) -- %b\n", i, x, x, y)
 		if y != expected[i] {
 			t.Fatalf("Got %b -- want: %b", y, expected[i])

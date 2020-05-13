@@ -1,9 +1,10 @@
 package vector
 
-//Polynom is the core abstraction for a cryptographic number
-type Polynom struct {
-	Vector []int64
-	Len    uint8
+//Polynom64 is the core abstraction for a cryptographic number
+type Polynom64 struct {
+	Vector []Ariphmetic64
+	Mask   uint64
+	Len    uint16
 }
 
 /*

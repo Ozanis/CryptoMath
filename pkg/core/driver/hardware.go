@@ -1,6 +1,5 @@
-package ukernel
+package driver
 
-/*
 func findCUDA() string {
 	return ""
 }
@@ -11,11 +10,10 @@ func findOpenCl() string {
 
 func UseGpu() string {
 	var gpuInfo = []string{findCUDA(), findOpenCl()}
-	for i := range gpuInfo {
+	for _, i := range gpuInfo {
 		if i != "" {
 			return i
 		}
 	}
 	return "native"
 }
-*/

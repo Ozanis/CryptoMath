@@ -3,30 +3,11 @@ package vector
 import "unsafe"
 
 const (
-	//MaskLow32 - bitmask for getting high order half of number
-	MaskLow32 = int64(0x0000ffff)
-	//MaskHigh32 - bitmask for getting low order half of number
-	MaskHigh32 = int64(0xffff0000)
-	//Zero16 - predefined 16 bit representation of zero
+	//Zero16 precalculated 16 bit zero representation
 	Zero16 = uint16(0)
-	//One16 - predefined 16 bit representation of one
+	//One16 precalculated 16 bit one's representation
 	One16 = uint16(1)
 )
-
-//HighHalf - getting high order part of int64 number
-func highBits32(x int64) int64 {
-	return (x & MaskHigh32) >> 32
-}
-
-//LowHalf - getting low order of part int64
-func lowBits32(x int64) int64 {
-	return x & MaskLow32
-}
-
-//HalfMul - multiplication for avoid 64bit overflow
-func HalfMul(x, y int64) (int64, int64) {
-	return lowBits32(x) * lowBits32(y), highBits32(y) * highBits32(x)
-}
 
 //BinPower returns 2 base number rounded down in O(log(N))
 func BinPower(x uint16) uint16 {
@@ -34,7 +15,6 @@ func BinPower(x uint16) uint16 {
 	x |= x >> 2
 	x |= x >> 4
 	x |= x >> 8
-	//x |= x >> 16
 	return x - (x >> 1)
 }
 
@@ -45,11 +25,11 @@ func NextBinPower(x uint16) uint16 {
 
 //IsBinRadix returns 1 in case if given number is radix of 2 and 0 otherwise in O(1)
 func IsBinRadix(x uint16) uint16 {
-	return (x & (x - 1)) ^ Zero16
+	return (x & (x - 1)) ^ 0
 }
 
-//Transpose implements bit inversion required by FFT
-func Transpose(x, n uint16) uint16 {
+//Invert implements bit inversion with O(log(N)) required by FFT
+func Invert(x, n uint16) uint16 {
 	var y uint16
 	for i := Zero16; i < n; i++ {
 		y <<= 1
@@ -59,26 +39,31 @@ func Transpose(x, n uint16) uint16 {
 	return y
 }
 
-//LogBin finds log with  base 2 of 32 bit number with log(N) complexity and without branching
+//LogBin finds log with  base 2 of 32 bit number with O(log(N)) complexity and without branching
 func LogBin(x uint16) uint16 {
-	y := BoolToInt(x > 0xFF) << 3
+	y := BoolToInt16(x > 0xFF) << 3
 	x >>= y
-	shift := BoolToInt(x > 0xF) << 2
+	shift := BoolToInt16(x > 0xF) << 2
 	x >>= shift
 	y |= shift
-	shift = BoolToInt(x > 0x3) << 1
+	shift = BoolToInt16(x > 0x3) << 1
 	x >>= shift
 	y |= shift
 	return x>>1 | y
 }
 
-//BoolToInt used for fast conversion bool to uint32
-func BoolToInt(x bool) uint16 {
-	return *(*uint16)(unsafe.Pointer(&x)) & One16
+//BoolToInt64 used for fast conversion bool to uint64
+func BoolToInt64(x bool) uint64 {
+	return *(*uint64)(unsafe.Pointer(&x)) & 1
 }
 
-//IntToBool used for fast conversion from uint32 to bool
+//BoolToInt16 used for fast conversion bool to uint16
+func BoolToInt16(x bool) uint16 {
+	return *(*uint16)(unsafe.Pointer(&x)) & 1
+}
+
+//IntToBool used for fast conversion from uint16 to bool
 func IntToBool(x uint16) bool {
-	x &= One16
+	x &= 1
 	return *(*bool)(unsafe.Pointer(&x))
 }
