@@ -18,11 +18,11 @@ var (
 )
 
 func TestLen(t *testing.T) {
-	expected := []uint8{4, 6, 8}
+	expected := []uint8{3, 5, 7}
 	for i, got := range expected {
 		got = Len(operatorTestCasesX[i])
 		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], "-- got : ", got)
+			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
 		}
 	}
 }
@@ -32,7 +32,7 @@ func TestEquals(t *testing.T) {
 	for i, got := range expected {
 		got = Equals(operatorTestCasesX[i], operatorTestCasesY[i])
 		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], "-- got : ", got)
+			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
 		}
 	}
 }
@@ -42,7 +42,7 @@ func TestGreater(t *testing.T) {
 	for i, got := range expected {
 		got = Greater(operatorTestCasesX[i], operatorTestCasesY[i])
 		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], "-- got : ", got)
+			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
 		}
 	}
 }
@@ -52,17 +52,17 @@ func TestGreaterEquals(t *testing.T) {
 	for i, got := range expected {
 		got = GreaterEquals(operatorTestCasesX[i], operatorTestCasesY[i])
 		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], "-- got : ", got)
+			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
 		}
 	}
 }
 
 func TestLesser(t *testing.T) {
-	expected := []bool{false, true, false, false}
+	expected := []bool{false, true, false, true}
 	for i, got := range expected {
 		got = Lesser(operatorTestCasesX[i], operatorTestCasesY[i])
 		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], "-- got : ", got)
+			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
 		}
 	}
 }

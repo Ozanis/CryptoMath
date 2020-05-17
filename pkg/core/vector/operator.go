@@ -1,6 +1,6 @@
 package vector
 
-//Len is a warepper arround the builtin len() which works for Numbers
+//Len is a warepper arround the builtin len()-1 which works for Numbers
 func Len(vector Number) uint8 {
 	return uint8(len(vector.GetCoeficients())) - 1
 }
@@ -37,8 +37,8 @@ func GreaterEquals(vector1, vector2 Number) bool {
 		return false
 	}
 	for i := Zero; i < Len(vector1); i++ {
-		if vector1.GetPos(i) < vector2.GetPos(i) {
-			return false
+		if vector1.GetPos(i) >= vector2.GetPos(i) {
+			return true
 		}
 	}
 	return true
