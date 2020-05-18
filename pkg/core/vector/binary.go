@@ -58,3 +58,8 @@ func IntToBool(x uint8) bool {
 	x &= 1
 	return *(*bool)(unsafe.Pointer(&x))
 }
+
+//Len is a wrapper arround len() which return uint8 requires by some algorithms
+func Len(vector []int8) uint8 {
+	return uint8(len(vector))
+}

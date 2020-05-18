@@ -1,66 +1,67 @@
 package vector
 
-//Vector is a sequence of polynomial coeficients in the binary field Z(2^m)
-type Vector []int8
-
-//GetCoeficients represents vector as int8 array
-func (V Vector) GetCoeficients() []int8 {
-	return []int8(V)
-}
-
-//GetPos returns coeficint on exact position
-func (V Vector) GetPos(idx uint8) int8 {
-	return V[idx]
-}
+//NativeVector is realisation of operators using native compiler optimisation
+type NativeVector struct{}
 
 //Sub is substraction vector operator
-func (V Vector) Sub(vector Vector) Vector {
-	carry := int8(0)
-	for i, x := range vector {
-		V[i] ^= x ^ carry
-		carry = V[i] & x
+func (NativeVector) Sub(x, y, mod []int8) []int8 {
+	var carry int8
+	vector := make([]int8, len(mod))
+	for i := len(mod); i >= 0; i-- {
+		vector[i] = x[i] ^ y[i]
+		carry = int8(BoolToInt(x[i] > y[i]))
+		vector[i+1] ^= carry
 	}
-	return V
+	return x
 }
 
 //Add is addition vector operator
-func (V Vector) Add(vector Vector) Vector {
-	carry := int8(0)
-	for i, x := range vector {
-		V[i] ^= x ^ carry
-		carry = V[i] & x
+func (NativeVector) Add(x, y, mod []int8) []int8 {
+	var carry int8
+	vector := make([]int8, len(mod))
+	for i := len(mod); i >= 0; i-- {
+		vector[i] = x[i] ^ y[i] ^ carry
+		carry = x[i] & y[i]
 	}
-	return V
+	return vector
 }
 
 //Mul is multiplication vector operator
-func (V Vector) Mul(vector Vector) Vector {
-	return Fwht(Convolution(Fwht(vector), Fwht(V)))
+func (NativeVector) Mul(x, y, mod []int8) []int8 {
+	return RadixTwo((Fwht(Convolution(Fwht(x), Fwht(y)))), LogBin(Len(mod)))
 }
 
 //Sqr is a squaring vector operator
-func (V Vector) Sqr() Vector {
-	fwhtVector := Fwht(V)
-	return Fwht(Convolution(fwhtVector, fwhtVector))
+func (NativeVector) Sqr(x, mod []int8) []int8 {
+	fwhtVector := Fwht(x)
+	return RadixTwo(Fwht(Convolution(fwhtVector, fwhtVector)), LogBin(Len(mod)))
 }
 
 //Exp is an exponentiation vector operator
-func (V Vector) Exp(vector Vector) Vector {
-	fwhtVector := Fwht(vector)
-	return Fwht(Convolution(fwhtVector, fwhtVector))
+func (NativeVector) Exp(x, mod []int8) []int8 {
+	return x
 }
 
 //Inv finds multiplicative inverse
-func (V Vector) Inv(vector Vector) Vector {
-	return vector
+func (NativeVector) Inv(x, mod []int8) []int8 {
+	return x
 }
 
 //Mod is a vector(polynomial) modulus operator
-func (V Vector) Mod(vector Vector) Vector {
-	return vector
+func (NativeVector) Mod(x, mod []int8) []int8 {
+	modulo := make([]int8, len(mod))
+	for i := range modulo {
+		modulo[i] = x[i] ^ mod[i]
+	}
+	return modulo
 }
 
 //Div is a vector(polynomial) division operator
-func (V Vector) Div(vector Vector) Vector {
-	return vector
+func (NativeVector) Div(x, y, mod []int8) []int8 {
+	return x
+}
+
+//IsIrreducible checks does polynom irreducible
+func (NativeVector) IsIrreducible() bool {
+	return true
 }

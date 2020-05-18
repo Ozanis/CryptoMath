@@ -5,15 +5,13 @@ import (
 )
 
 var (
-	vectorTestCasesX = []Vector{
+	vectorTestCasesX = [][]int8{
 		{1, 1, 0, 1},
 		{1, 1, 1, 1, 0, 0, 0, 0},
-		//{1, 1, 0, 1, 1, 0, 1},
 	}
-	vectorTestCasesY = []Vector{
+	vectorTestCasesY = [][]int8{
 		{0, 1, 1, 0},
 		{1, 0, 1, 0, 1, 0, 1, 0},
-		//{1, 1, 0, 1, 1, 0},
 	}
 )
 
@@ -22,7 +20,7 @@ func TestRadixTwo(t *testing.T) {
 }
 
 func TestFhwt(t *testing.T) {
-	expected := []Vector{
+	expected := [][]int8{
 		{1, 0, 1, 0},
 		{1, 1, 1, 1, 1, 1, 1, 1},
 	}
@@ -35,10 +33,10 @@ func TestFhwt(t *testing.T) {
 }
 
 func TestConvolution(t *testing.T) {
-	expected := []Vector{
+	expected := [][]int8{
 		{1, 0, 0, 1, 1, 1, 0},
 	}
-	for i := 0; i < len(expected)/2; i += 2 {
+	for i := range expected {
 		result := Fwht(Convolution(Fwht(vectorTestCasesX[i]), Fwht(vectorTestCasesY[i])))
 		if !Equals(result, expected[i]) {
 			t.Fatal(i, " expected: ", expected[i], "-- got : ", result)

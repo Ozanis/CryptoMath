@@ -3,29 +3,19 @@ package vector
 import "testing"
 
 var (
-	operatorTestCasesX = []Vector{
+	operatorTestCasesX = [][]int8{
 		{1, 1, 0, 1},
 		{1, 1, 0, 1, 1, 0},
 		{1, 1, 1, 1, 0, 0, 0, 0},
 		{1, 1, 0, 1, 1, 0, 1},
 	}
-	operatorTestCasesY = []Vector{
+	operatorTestCasesY = [][]int8{
 		{0, 1, 1, 0},
 		{1, 1, 0, 1, 1, 0},
 		{1, 0, 1, 0, 1, 0, 1, 0},
 		{1, 1, 0, 1, 1, 0},
 	}
 )
-
-func TestLen(t *testing.T) {
-	expected := []uint8{3, 5, 7}
-	for i, got := range expected {
-		got = Len(operatorTestCasesX[i])
-		if got != expected[i] {
-			t.Fatal(i, " expected: ", expected[i], " -- got : ", got)
-		}
-	}
-}
 
 func TestEquals(t *testing.T) {
 	expected := []bool{false, true, false, false}
