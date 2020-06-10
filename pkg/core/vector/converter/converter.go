@@ -1,4 +1,4 @@
-package vector
+package converter
 
 //Converter interface is abstraction layer over different vector types
 type Converter interface {

@@ -1,4 +1,4 @@
-package vector
+package operator
 
 //Equals is an operator of equality for veectors
 func Equals(x, y []int8) bool {
@@ -18,6 +18,9 @@ func Greater(x, y []int8) bool {
 	if len(x) > len(y) {
 		return true
 	}
+	if len(x) < len(y) {
+		return false
+	}
 	for i := range x {
 		if x[i] > y[i] {
 			return true
@@ -31,10 +34,14 @@ func GreaterEquals(x, y []int8) bool {
 	if len(x) < len(y) {
 		return false
 	}
+	if len(x) > len(y) {
+		return true
+	}
 	for i := range x {
 		if x[i] >= y[i] {
 			return true
 		}
+		return false
 	}
 	return true
 }
@@ -44,12 +51,16 @@ func Lesser(x, y []int8) bool {
 	if len(x) < len(y) {
 		return true
 	}
-	for i := range x {
-		if x[i] > y[i] {
-			return false
-		}
+	if len(x) > len(y) {
+		return false
 	}
-	return true
+	for i := range x {
+		if x[i] < y[i] {
+			return true
+		}
+		return false
+	}
+	return false
 }
 
 //LesserEquals is an operator that defines one vector is lesser or equals then another
