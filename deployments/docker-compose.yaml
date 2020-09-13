@@ -1,8 +1,0 @@
-version: "3.8"
-services:
-  testing:
-    build:
-        dockerfile: ./package/testing.Dockerfile
-        context: ./pkg
-        args: 
-            GO_VERSION: 1.14.2
