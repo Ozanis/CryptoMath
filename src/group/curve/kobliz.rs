@@ -1,3 +1,0 @@
-mod group::curve::kobliz{
-    
-}
