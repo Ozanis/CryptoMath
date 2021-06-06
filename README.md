@@ -1,4 +1,4 @@
-<h1>CryptOps</h1>
+<h1>Numerology</h1>
  
 *Researching and development*
 
@@ -9,7 +9,7 @@
 * Factorization algorithms
 * Randomness testing
 
-
+## It is mostly about my algoritmic training for a free time
 
 
 
