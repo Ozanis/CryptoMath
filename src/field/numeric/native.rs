@@ -1,3 +1,8 @@
+use crate::operator::group::*;
+use crate::operator::logical::*;
+use crate::operator::modular::*;
+use crate::operator::multiplicative::*;
+
 /*
 //Euclidian uses extend algorithm to find multiplicative inverse
 func Euclidian(x, mod []int8) []int8 {
