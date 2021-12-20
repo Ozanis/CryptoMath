@@ -1,16 +1,9 @@
-<h1>Numerology</h1>
+# Numerology
+
+The Rust library for efficient large number algebra and cryptographic applications (or related).
+
+Inspired by [my other project](https://github.com/mstrielnikov/VitaminC/blob/main/README.md).
  
-*Researching and development*
-
-* GPU/CPU scaling
-* Detect weak ciphers
-* Cipher testing and validating
-* Vulnerability testing
-* Factorization algorithms
-* Randomness testing
-
-## It is mostly about my algoritmic training for a free time
-
 
 
 
