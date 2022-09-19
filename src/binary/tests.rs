@@ -20,7 +20,7 @@ mod tests {
 		];
 		let mut got : usize;
 		for i in 0..expected.len() {
-			got = order(TEST_X[i]);
+			got = log_bin(TEST_X[i]);
 			dbg!(i, TEST_X[i], got);
 			assert_eq!(got, expected[i]);
 		}

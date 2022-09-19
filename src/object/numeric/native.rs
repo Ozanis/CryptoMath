@@ -1,6 +1,5 @@
 use crate::operator::group::*;
 use crate::operator::logical::*;
-use crate::operator::modular::*;
 use crate::operator::multiplicative::*;
 
 /*

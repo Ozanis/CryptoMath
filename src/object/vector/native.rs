@@ -1,6 +1,5 @@
 use crate::operator::group::*;
 use crate::operator::logical::*;
-use crate::operator::modular::*;
 use crate::operator::multiplicative::*;
 use crate::operator::convolution::*;
 
@@ -180,8 +179,8 @@ impl ForwardTransfrom<NativeVector> for NativeVector {
 	}
 }
 
-impl Mul <NativeVector> for NativeVector {	
-    fn mul(&mut self, x : &NativeVector, y : &NativeVector) -> &NativeVector {
+impl Mult <NativeVector> for NativeVector {	
+    fn mult(&mut self, x : &NativeVector, y : &NativeVector) -> &NativeVector {
 		self.forward_transform(x, y);
 		self.carry();
 		return self
@@ -195,8 +194,8 @@ impl Sqr <NativeVector> for NativeVector {
 }
 
 /*
-impl Exp<NativeVector> for NativeVector {
-	fn exp(&self, &pow : Vec<u8>, &modulo : Vec<u8>) {
+impl Pow<NativeVector> for NativeVector {
+	fn pow(&self, &pow : Vec<u8>, &modulo : Vec<u8>) {
 		for i in 1..pow.len() {
 			if i & 1 == 1 {
 				res = res * self % modulo;
@@ -208,8 +207,8 @@ impl Exp<NativeVector> for NativeVector {
 
 }*/
 
-impl Rem <NativeVector> for NativeVector{
-    fn rem(&mut self, x : &NativeVector, modulo : &NativeVector) -> &NativeVector {
+impl Modulo <NativeVector> for NativeVector{
+    fn modulo(&mut self, x : &NativeVector, modulo : &NativeVector) -> &NativeVector {
 		return self;
     }
 }
